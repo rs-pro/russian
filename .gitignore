@@ -3,3 +3,5 @@
 pkg
 .bundle
 .rvmrc
+.idea
+tmp/*
