@@ -1,13 +1,13 @@
 # coding: utf-8
 
-$KCODE = 'u' if RUBY_VERSION < "1.9"
+$KCODE = 'u' if RUBY_VERSION < '1.9'
 
 require 'i18n'
 
-$:.push File.join(File.dirname(__FILE__), 'russian')
+$LOAD_PATH.push File.join(File.dirname(__FILE__), 'russian')
 require 'russian_rails'
 
-if RUBY_ENGINE == "jruby"
+if RUBY_ENGINE == 'jruby'
   require 'unicode_utils/upcase'
 else
   require 'unicode'
@@ -19,7 +19,7 @@ module Russian
   autoload :Transliteration, 'transliteration'
 
   # Russian locale
-  LOCALE = :'ru'
+  LOCALE = :ru
 
   # Russian locale
   def locale
@@ -44,19 +44,19 @@ module Russian
 
   # See I18n::translate
   def translate(key, options = {})
-    I18n.translate(key, options.merge({ :locale => LOCALE }))
+    I18n.translate(key, options.merge({ locale: LOCALE }))
   end
-  alias :t :translate
+  alias_method :t, :translate
 
   # See I18n::localize
   def localize(object, options = {})
-    I18n.localize(object, options.merge({ :locale => LOCALE }))
+    I18n.localize(object, options.merge({ locale: LOCALE }))
   end
-  alias :l :localize
+  alias_method :l, :localize
 
   # strftime() proxy with Russian localization
   def strftime(object, format = :default)
-    localize(object, { :format => check_strftime_format(object, format) })
+    localize(object, { format: check_strftime_format(object, format) })
   end
 
   # Simple pluralization proxy
@@ -66,13 +66,13 @@ module Russian
   #   Russian.pluralize(3.14, "вещь", "вещи", "вещей", "вещи")
   #   Russina.pluralize(5, "Произошла %n ошибка", "Произошло %n ошибки", "Произошло %n ошибок")
   def pluralize(n, *variants)
-    raise ArgumentError, "Must have a Numeric as a first parameter" unless n.is_a?(Numeric)
-    raise ArgumentError, "Must have at least 3 variants for pluralization" if variants.size < 3
-    raise ArgumentError, "Must have at least 4 variants for pluralization" if (variants.size < 4 && n != n.round)
+    fail ArgumentError, 'Must have a Numeric as a first parameter' unless n.is_a?(Numeric)
+    fail ArgumentError, 'Must have at least 3 variants for pluralization' if variants.size < 3
+    fail ArgumentError, 'Must have at least 4 variants for pluralization' if variants.size < 4 && n != n.round
     variants_hash = pluralization_variants_to_hash(n, *variants)
     I18n.backend.send(:pluralize, LOCALE, variants_hash, n)
   end
-  alias :p :pluralize
+  alias_method :p, :pluralize
 
   # Transliteration for russian language
   #
@@ -82,44 +82,39 @@ module Russian
   def transliterate(str)
     Russian::Transliteration.transliterate(str)
   end
-  alias :translit :transliterate
+  alias_method :translit, :transliterate
 
   protected
 
-    def check_strftime_format(object, format)
-      %w(A a B b).each do |key|
-        if format =~ /%\^#{key}/
-          if RUBY_ENGINE == "jruby"
-            format = format.gsub("%^#{key}", UnicodeUtils.upcase(localize(object, { :format => "%#{key}" } )))
-          else
-            format = format.gsub("%^#{key}", Unicode::upcase(localize(object, { :format => "%#{key}" } )))
-          end
-        end
-      end
-
-      format
+  def check_strftime_format(object, format)
+    %w(A a B b).each do |key|
+      next unless format =~ /%\^#{key}/
+      if RUBY_ENGINE == 'jruby'
+        format = format.gsub("%^#{key}", UnicodeUtils.upcase(localize(object, { format: "%#{key}" })))
+      else
+        format = format.gsub("%^#{key}", Unicode.upcase(localize(object, { format: "%#{key}" })))
+              end
     end
 
-    # Returns all locale files shipped with library
-    def locale_files
-      Dir[File.join(File.dirname(__FILE__), "russian", "locale", "**/*")]
-    end
+    format
+  end
 
-    # Converts an array of pluralization variants to a Hash that can be used
-    # with I18n pluralization.
-    def pluralization_variants_to_hash(n, *variants)
-      variants.map!{ |variant| variant.gsub '%n', n.to_s }
-      {
-        :one => variants[0],
-        :few => variants[1],
-        :many => variants[2],
-        :other => variants[3]
-      }
-    end
+  # Returns all locale files shipped with library
+  def locale_files
+    Dir[File.join(File.dirname(__FILE__), 'russian', 'locale', '**/*')]
+  end
+
+  # Converts an array of pluralization variants to a Hash that can be used
+  # with I18n pluralization.
+  def pluralization_variants_to_hash(n, *variants)
+    variants.map! { |variant| variant.gsub '%n', n.to_s }
+    {
+      one: variants[0],
+      few: variants[1],
+      many: variants[2],
+      other: variants[3]
+    }
+  end
 end
 
 Russian.init_i18n
-
-if Object.const_defined?('RailsAdmin')
-  require 'rails_admin_datetime'
-end
