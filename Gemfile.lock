@@ -1,25 +1,25 @@
 PATH
   remote: .
   specs:
-    rs_russian (0.16.0)
-      activesupport (>= 3.0.0, < 6.2.0)
+    rs_russian (0.17.0)
+      activesupport (>= 6.1.0, < 6.2.0)
       i18n (~> 1.8.0)
       unicode (~> 0.4.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.0)
+    activesupport (6.1.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
-    concurrent-ruby (1.1.7)
+    concurrent-ruby (1.1.8)
     diff-lcs (1.4.4)
-    i18n (1.8.5)
+    i18n (1.8.9)
       concurrent-ruby (~> 1.0)
-    minitest (5.14.2)
+    minitest (5.14.3)
     rake (10.5.0)
     rspec (2.99.0)
       rspec-core (~> 2.99.0)
