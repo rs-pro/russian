@@ -124,9 +124,9 @@ describe Russian do
         lambda { Russian.send(method, 1) }.should raise_error(ArgumentError)
         lambda { Russian.send(method, 1, "вещь") }.should raise_error(ArgumentError)
         lambda { Russian.send(method, 1, "вещь", "вещи") }.should raise_error(ArgumentError)
-        lambda { Russian.send(method, 1, "вещь", "вещи", "вещей") }.should_not raise_error(ArgumentError)
+        expect { Russian.send(method, 1, "вещь", "вещи", "вещей") }.not_to raise_error
         lambda { Russian.send(method, 3.14, "вещь", "вещи", "вещей") }.should raise_error(ArgumentError)
-        lambda { Russian.send(method, 3.14, "вещь", "вещи", "вещей", "вещи") }.should_not raise_error(ArgumentError)
+        expect { Russian.send(method, 3.14, "вещь", "вещи", "вещей", "вещи") }.not_to raise_error
       end
     end
   end
