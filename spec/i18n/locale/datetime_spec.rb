@@ -115,6 +115,6 @@ describe I18n, "Russian Date/Time localization" do
 
   protected
     def l(object, options = {})
-      I18n.l(object, options.merge( { :locale => Russian.locale }))
+      I18n.l(object, **options.merge( { :locale => Russian.locale }))
     end
 end
