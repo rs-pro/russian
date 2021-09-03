@@ -36,7 +36,7 @@ module RailsAdmin
             ret = if time = (value || default_value)
               opt = {format: strftime_format, standalone: true}
               Russian.force_standalone = true
-              r = ::I18n.l(time, opt)
+              r = ::I18n.l(time, **opt)
               Russian.force_standalone = false
               r
             else
