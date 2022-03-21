@@ -1,25 +1,24 @@
 PATH
   remote: .
   specs:
-    rs_russian (0.19.0)
-      activesupport (>= 6.1.0, < 6.2.0)
-      i18n (~> 1.8.0)
+    rs_russian (0.20.0)
+      activesupport (>= 6.1.0)
+      i18n (~> 1.8)
       unicode (~> 0.4.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.4.1)
+    activesupport (7.0.2.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
     concurrent-ruby (1.1.9)
-    diff-lcs (1.4.4)
-    i18n (1.8.10)
+    diff-lcs (1.5.0)
+    i18n (1.10.0)
       concurrent-ruby (~> 1.0)
-    minitest (5.14.4)
+    minitest (5.15.0)
     rake (10.5.0)
     rspec (2.99.0)
       rspec-core (~> 2.99.0)
@@ -32,7 +31,6 @@ GEM
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode (0.4.4.4)
-    zeitwerk (2.4.2)
 
 PLATFORMS
   ruby
