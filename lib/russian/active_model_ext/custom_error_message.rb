@@ -41,7 +41,7 @@ if defined?(ActiveModel::Errors)
               end
             end
             {k => m}
-          end.reduce(:merge)
+          end.reduce(:merge) || {}
         end
       end
     end
