@@ -19,8 +19,8 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.summary = %q{Russian language support for Ruby and Rails}
 
-  s.add_dependency('i18n', '>= 0.5.0')
+  s.add_dependency('i18n', '1.8.11')
 
-  s.add_development_dependency 'activesupport', '>= 3.0.0'
-  s.add_development_dependency 'rspec', '~> 2.7.0'
+  s.add_development_dependency 'activesupport', '>= 6.1.0'
+  s.add_development_dependency 'rspec', '~> 3.12.0'
 end
