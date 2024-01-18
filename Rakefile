@@ -6,5 +6,5 @@ task :default => :spec
 desc "Run specs"
 RSpec::Core::RakeTask.new do |t|
   t.pattern = 'spec/**/*_spec.rb'
-  t.rspec_opts = %w(--color)
+  t.rspec_opts = %w(-fd --color)
 end
