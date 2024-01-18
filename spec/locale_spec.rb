@@ -27,18 +27,18 @@ describe Russian, "loading locales" do
     time.pm
   ).each do |key| 
     it "should define '#{key}' in datetime translations" do
-      lookup(key).should_not be_nil
+      expect(lookup(key)).to_not be_nil
     end
   end
   
   it "should load pluralization rules" do
-    lookup(:'i18n.plural.rule').should_not be_nil
-    lookup(:'i18n.plural.rule').is_a?(Proc).should be true
+    expect(lookup(:'i18n.plural.rule')).to_not be_nil
+    expect(lookup(:'i18n.plural.rule').is_a?(Proc)).to be true
   end
 
   it "should load transliteration rule" do
-    lookup(:'i18n.transliterate.rule').should_not be_nil
-    lookup(:'i18n.transliterate.rule').is_a?(Proc).should be true
+    expect(lookup(:'i18n.transliterate.rule')).to_not be_nil
+    expect(lookup(:'i18n.transliterate.rule').is_a?(Proc)).to be true
   end
   
   def lookup(*args)
