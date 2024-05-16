@@ -6,13 +6,7 @@ require 'i18n'
 
 $:.push File.join(File.dirname(__FILE__), 'russian')
 require 'russian_rails'
-
-if RUBY_ENGINE == "jruby"
-  require 'unicode_utils/upcase'
-else
-  require 'unicode'
-end
-
+require 'date'
 require 'active_support/core_ext/module/attribute_accessors'
 
 module Russian
@@ -97,11 +91,7 @@ module Russian
     def check_strftime_format(object, format)
       %w(A a B b).each do |key|
         if format =~ /%\^#{key}/
-          if RUBY_ENGINE == "jruby"
-            format = format.gsub("%^#{key}", UnicodeUtils.upcase(localize(object, { :format => "%#{key}" } )))
-          else
-            format = format.gsub("%^#{key}", Unicode::upcase(localize(object, { :format => "%#{key}" } )))
-          end
+          format = format.gsub("%^#{key}", localize(object, { :format => "%#{key}" } ).upcase)
         end
       end
 

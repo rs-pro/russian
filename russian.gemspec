@@ -19,10 +19,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'i18n', '~> 1.8'
-  spec.add_dependency 'unicode', '~> 0.4.4'
   spec.add_dependency 'activesupport', ['>= 6.1.0']
 
   spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'rake', '< 11.0'
-  spec.add_development_dependency 'rspec', '~> 2.14'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
 end
